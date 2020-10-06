@@ -1,4 +1,4 @@
--- Lecture 6 samples
+-- Lecture 5 cont. samples
 
 SELECT format('ID: %s, name: %s', product_id, product_name) AS name
 FROM products;
@@ -17,9 +17,9 @@ SELECT
   product_name,
   char_length(product_name),
   CASE
-  WHEN char_length(product_name) < 16
+  WHEN char_length(product_name) <= 15
     THEN 'short size name'
-  WHEN char_length(product_name) BETWEEN 16 AND 30
+  WHEN char_length(product_name) BETWEEN 15 AND 30
     THEN 'medium size name'
   ELSE 'long size name'
   END AS "Product name size"
@@ -51,6 +51,9 @@ FROM products
 WHERE brand_id = 9;
 
 
+SELECT to_char(1234, '9999.999');
+
+
 SELECT *
 FROM products
 WHERE exists(
@@ -61,7 +64,7 @@ WHERE exists(
 
 SELECT *
 FROM products
-WHERE product_id NOT IN (
+WHERE product_id IN (
   SELECT product_id
   FROM products
   WHERE list_price > 1000
@@ -94,7 +97,3 @@ WHERE product_id < ALL (
 SELECT product_id
   FROM products
   WHERE list_price > 6000
-
-
-
-
